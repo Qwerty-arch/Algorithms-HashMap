@@ -75,6 +75,20 @@ public class ChainingHashMap<Key, Value> {
         return null;
     }
 
+    public Value delete(Key key) {
+        checkKeyNotNull(key);
+        int i = hash(key);
+        for (int j = 0; j < st[i].size(); j++) {
+            if (key.equals(st[i].get(j).key)) {
+                Node temp = st[i].get(j);
+                st[i].remove(st[i].get(j));
+                size--;
+                return temp.value;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -87,7 +101,5 @@ public class ChainingHashMap<Key, Value> {
 
         return sb.toString();
     }
-
-    //реализовать метод удаления.
 }
 
